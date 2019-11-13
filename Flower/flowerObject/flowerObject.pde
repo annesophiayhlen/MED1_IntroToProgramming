@@ -15,9 +15,13 @@ void draw(){
   f1.bounce();
   f1.move();
   f1.display();
+  
+  
   f2.bounce();
   f2.move();
+  f2.displayTail();
   f2.display();
+  
   f3.bounce();
   f3.move();
   f3.display();
