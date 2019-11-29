@@ -11,6 +11,7 @@ class Flower {
   int tailLength = 100;
   float[] tailXPos = new float [tailLength];
   float[] tailYPos = new float [tailLength];
+  int indexPosition = 0;
 
 
   Flower(int radius, float speed, float xLocation, float yLocation) {
@@ -36,23 +37,39 @@ class Flower {
     if (x > width-r || x < r || y > height || y < 0) xDirc = xDirc*-1; //bouncing on x-axis
   }
 
-  void displayTail() {
+  void displayTail_1() {
     for (int i = tailLength - 1; 
       i > 0; 
       i --) {
       tailXPos[i] = tailXPos[i-1];
       tailYPos[i] = tailYPos[i-1];
     }
-    
+
     tailXPos[0] = x;
     tailYPos[0] = y;
-    
-    
+
+
     for (int i = 0; i < tailLength; i++) {
-    fill(color(random(255), random(255), random(255)));
-    circle(tailXPos[i], tailYPos[i], r/4);
+      fill(color(random(255), random(255), random(255)));
+      circle(tailXPos[i], tailYPos[i], r/4);
     }
-    
+  }
+
+  /*
+    int tailLength = 100;
+   float[] tailXPos = new float [tailLength];
+   float[] tailYPos = new float [tailLength];
+   int indexPosition = 0;
+   */
+  void displayTail_2() {
+    tailXPos[indexPosition]= x;
+    tailYPos[indexPosition]= y;
+    indexPosition = (indexPosition + 1) % tailLength;
+    for (int i = 0; i < tailLength; i++) {
+      int pos = (indexPosition + i) % tailLength;
+      float radius = (tailLength-i) / 2;
+      ellipse(tailXPos[pos],tailYPos[pos],radius,radius);
+    }
   }
 
   void display() {
